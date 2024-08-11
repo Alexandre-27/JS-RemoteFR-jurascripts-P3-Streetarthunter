@@ -51,7 +51,7 @@ function MapForm() {
       case 1:
         return (
           <>
-            <h2 className="player-mode">Ajouter une capture</h2>
+            <h2 className="admin-mode">Ajouter une capture</h2>
 
             <p>Se connecter en tant que joueur pour jouer</p>
           </>
