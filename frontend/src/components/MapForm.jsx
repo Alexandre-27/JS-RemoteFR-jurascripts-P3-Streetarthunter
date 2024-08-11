@@ -53,7 +53,7 @@ function MapForm() {
           <>
             <h2 className="player-mode">Ajouter une capture</h2>
 
-            <p>Se connecter en tant qu'utilisateur pour jouer</p>
+            <p>Se connecter en tant que joueur pour jouer</p>
           </>
         );
       case 0:
