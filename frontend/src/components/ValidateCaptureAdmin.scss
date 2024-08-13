@@ -2,11 +2,11 @@
 
 .ValidateCapturePoints {
   position: fixed;
-  top: 25%;
+  top: 27%;
   left: 30.5%;
   z-index: 15;
   width: 40%;
-  height: 62vh;
+  height: 43vh;
   background-color: $deep-purple;
   border: 1px solid $red;
   border-radius: 3%;
@@ -37,21 +37,10 @@
     color: $red;
   }
 
-  ul {
-    margin-top: 10%;
-
-    li {
-      display: flex;
-      justify-content: start;
-      margin-top: 3%;
-      margin-left: 5%;
-      list-style-type: none;
-
-      input {
-        margin-right: 7%;
-        width: 4%;
-      }
-    }
+  p {
+    max-width: 30ch;
+    text-align: center;
+    margin: auto;
   }
 
   button {

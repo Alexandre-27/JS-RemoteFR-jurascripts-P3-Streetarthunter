@@ -4,13 +4,7 @@ import "./ValidateCaptureAdmin.scss";
 
 function ValidateCaptureAdmin({
   setToggleModalCapture,
-  handleNewArtworkCheck,
-  handleHardToFindCheck,
-  handleAllFieldsFilledCheck,
   handleValidateButtonClick,
-  isNewArtwork,
-  isHardToFind,
-  isAllFieldsFilled,
   pointsUserId,
   deleteCaptureId,
 }) {
@@ -27,36 +21,10 @@ function ValidateCaptureAdmin({
         </button>
       </div>
       <h2>Valider</h2>
-      <ul>
-        <li>
-          <input
-            type="checkbox"
-            checked={isNewArtwork}
-            onChange={handleNewArtworkCheck}
-          />
-          <p>Nouvelle oeuvre</p>
-        </li>
-        <li>
-          <input
-            type="checkbox"
-            checked={isHardToFind}
-            onChange={handleHardToFindCheck}
-          />
-          <p>Oeuvre difficile à trouver</p>
-        </li>
-        <li>
-          <input
-            type="checkbox"
-            checked={isAllFieldsFilled}
-            onChange={handleAllFieldsFilledCheck}
-          />
-          <p>Tous les champs sont renseignés</p>
-        </li>
-        <li>
-          <input type="checkbox" />
-          <p>Ajouter cette oeuvre à la galerie générale</p>
-        </li>
-      </ul>
+      <p>
+        Êtes-vous sûr de vouloir valider cette oeuvre et accorder 100 points au
+        joueur ?
+      </p>
       <button
         type="button"
         className="button-red"
@@ -72,13 +40,7 @@ function ValidateCaptureAdmin({
 
 ValidateCaptureAdmin.propTypes = {
   setToggleModalCapture: PropTypes.func.isRequired,
-  handleNewArtworkCheck: PropTypes.func.isRequired,
-  handleHardToFindCheck: PropTypes.func.isRequired,
-  handleAllFieldsFilledCheck: PropTypes.func.isRequired,
   handleValidateButtonClick: PropTypes.func.isRequired,
-  isNewArtwork: PropTypes.bool.isRequired,
-  isHardToFind: PropTypes.bool.isRequired,
-  isAllFieldsFilled: PropTypes.bool.isRequired,
   pointsUserId: PropTypes.number.isRequired,
   deleteCaptureId: PropTypes.number.isRequired,
 };

@@ -30,10 +30,6 @@ function admin() {
   const [artCapture, setArtCapture] = useState([]);
   const [toggleModalCapture, setToggleModalCapture] = useState(false);
   const [refuseModalCapture, setRefuseModalCapture] = useState(false);
-  const [points, setPoints] = useState(0);
-  const [isNewArtwork, setIsNewArtwork] = useState(false);
-  const [isHardToFind, setIsHardToFind] = useState(false);
-  const [isAllFieldsFilled, setIsAllFieldsFilled] = useState(false);
   const [pointsUserId, setPointsUserId] = useState([]);
   const [deleteCaptureId, setDeleteCaptureId] = useState([]);
   const [notifCaptureCount, setNotifCaptureCount] = useState(0);
@@ -176,27 +172,6 @@ function admin() {
     };
   }, [initialOffset]);
 
-  const handleNewArtworkCheck = () => {
-    setIsNewArtwork(!isNewArtwork);
-    setPoints((prevPoints) =>
-      isNewArtwork ? prevPoints - 40 : prevPoints + 40
-    );
-  };
-
-  const handleHardToFindCheck = () => {
-    setIsHardToFind(!isHardToFind);
-    setPoints((prevPoints) =>
-      isHardToFind ? prevPoints - 40 : prevPoints + 40
-    );
-  };
-
-  const handleAllFieldsFilledCheck = () => {
-    setIsAllFieldsFilled(!isAllFieldsFilled);
-    setPoints((prevPoints) =>
-      isAllFieldsFilled ? prevPoints - 20 : prevPoints + 20
-    );
-  };
-
   const userId = (id) => {
     setPointsUserId(id);
   };
@@ -206,9 +181,14 @@ function admin() {
   };
 
   const handleValidateButtonClick = () => {
-    setPoints((prevPoints) => prevPoints + 100);
-    const totalPoints =
-      points + players.find((player) => player.id === pointsUserId).points;
+    const playerPoints = players.find((player) => player.id === pointsUserId);
+
+    if (!playerPoints) {
+      console.error("Joueur non trouvé !");
+      return;
+    }
+
+    const totalPoints = playerPoints.points + 100;
 
     axios
       .put(`${import.meta.env.VITE_BACKEND_URL}/api/users/${pointsUserId}`, {
@@ -217,6 +197,12 @@ function admin() {
       .then((response) => {
         setToggleModalCapture(false);
         console.info("Points ajoutés avec succès !", response);
+
+        setPlayers((prevPlayers) =>
+          prevPlayers.map((p) =>
+            p.id === pointsUserId ? { ...p, points: totalPoints } : p
+          )
+        );
       })
       .catch((error) => {
         console.error("Erreur lors de l'envoi des points:", error);
@@ -231,6 +217,11 @@ function admin() {
           "Suppression de l'œuvre effectuée avec succès !",
           response
         );
+
+        setArtCapture((prevArtCapture) =>
+          prevArtCapture.filter((capture) => capture.id !== deleteCaptureId)
+        );
+        setNotifCaptureCount((prevCount) => prevCount - 1);
       })
       .catch((error) => {
         console.error("Erreur lors de la suppression de l'œuvre:", error);
@@ -425,13 +416,7 @@ function admin() {
                   {toggleModalCapture === true && (
                     <ValidateCaptureAdmin
                       setToggleModalCapture={setToggleModalCapture}
-                      handleNewArtworkCheck={handleNewArtworkCheck}
-                      handleHardToFindCheck={handleHardToFindCheck}
-                      handleAllFieldsFilledCheck={handleAllFieldsFilledCheck}
                       handleValidateButtonClick={handleValidateButtonClick}
-                      isNewArtwork={isNewArtwork}
-                      isHardToFind={isHardToFind}
-                      isAllFieldsFilled={isAllFieldsFilled}
                       pointsUserId={pointsUserId}
                       deleteCaptureId={deleteCaptureId}
                     />
