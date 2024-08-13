@@ -28,7 +28,7 @@ function FilterUsersAdmin({ sortOrder, setSortOrder, setToggleUserFilter }) {
   };
 
   const handleSortNull = () => {
-    setSortOrder(null);
+    setSortOrder("ascId");
   };
 
   const handleClickFilter = () => {
