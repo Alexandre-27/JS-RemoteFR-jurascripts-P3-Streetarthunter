@@ -8,7 +8,6 @@ import "../styles/commons.scss";
 import "./Admin.scss";
 import NavBarAdmin from "../components/NavBarAdmin";
 import NavBarSa from "../components/NavBarSa";
-import MapAndFlag from "../assets/panel-admin/maps-and-flags-map-svgrepo-com.svg";
 import Avatar from "../assets/panel-admin/avatar-svgrepo-com.svg";
 import Hourglass from "../assets/panel-admin/hourglass-not-done-svgrepo-com.svg";
 import badge from "../assets/panel-admin/badge-award-svgrepo-com.svg";
@@ -297,7 +296,7 @@ function admin() {
                   </div>
                   <div className="notif-prev-parent-div">
                     <div className="notif-parent-div">
-                      {notifCaptureCount > 0 && (
+                      {notifCaptureCount > 0 ? (
                         <div className="notif-grid-div notif-child-div-yellow">
                           <p>
                             {notifCaptureCount} Street Art en attente de
@@ -305,13 +304,12 @@ function admin() {
                           </p>
                           <img alt="Sablier" src={Hourglass} />
                         </div>
+                      ) : (
+                        <p>
+                          Aucun Street Art en attente de validation pour le
+                          moment
+                        </p>
                       )}
-                    </div>
-                    <div className="notif-parent-div">
-                      <div className="notif-grid-div notif-child-div-cyan">
-                        <p>3 Street Art sont portés disparus</p>
-                        <img alt="Carte" src={MapAndFlag} />
-                      </div>
                     </div>
                   </div>
                 </section>
