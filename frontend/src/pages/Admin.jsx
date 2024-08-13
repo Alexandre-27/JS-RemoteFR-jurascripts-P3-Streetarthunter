@@ -137,8 +137,8 @@ function admin() {
       if (sortOrder === "descRank") {
         return b.ranking - a.ranking;
       }
-      if (sortOrder === null) {
-        return null;
+      if (sortOrder === "ascId") {
+        return a.id - b.id;
       }
       return null;
     })
