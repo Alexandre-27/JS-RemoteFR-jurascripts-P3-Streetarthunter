@@ -7,22 +7,18 @@ import { AuthContext } from "../context/AuthContext";
 import "../styles/commons.scss";
 import "./Admin.scss";
 import NavBarAdmin from "../components/NavBarAdmin";
-import NavBarSa from "../components/NavBarSa";
 import Avatar from "../assets/panel-admin/avatar-svgrepo-com.svg";
 import Hourglass from "../assets/panel-admin/hourglass-not-done-svgrepo-com.svg";
 import badge from "../assets/panel-admin/badge-award-svgrepo-com.svg";
 import light from "../assets/panel-admin/light-bulb-idea-svgrepo-com.svg";
 import CaptureAdmin from "../components/CaptureAdmin";
 import FilterUsersAdmin from "../components/FilterUsersAdmin";
-import NewArtAdmin from "../components/NewArtAdmin";
-import ReportedArtAdmin from "../components/ReportedArtAdmin";
 import ValidateCaptureAdmin from "../components/ValidateCaptureAdmin";
 import RefuseCaptureAdmin from "../components/RefuseCaptureAdmin";
 
 function admin() {
   const isMobile = useMediaQuery("only screen and (min-width: 600px)");
   const [activeSection, setActiveSection] = useState("dashboard");
-  const [activeComponent, setActiveComponent] = useState("captures");
   const [players, setPlayers] = useState([]);
   const [userSearch, setUserSearch] = useState("");
   const [userIndex, setUserIndex] = useState(0);
@@ -77,10 +73,6 @@ function admin() {
       window.removeEventListener("scroll", handleScroll);
     };
   }, []);
-
-  const handleActive = (section) => {
-    setActiveComponent(section);
-  };
 
   useEffect(() => {
     if (!userSearch) {
@@ -415,31 +407,21 @@ function admin() {
                 </section>
                 <section ref={streetArtRef}>
                   <h2 className="admin-h2" id="streetArt">
-                    Street Art
+                    Captures
                   </h2>
-                  <NavBarSa
-                    activeComponent={activeComponent}
-                    handleActive={handleActive}
-                  />
-                  {activeComponent === "captures" && (
-                    <div>
-                      {artCapture.length === 0 ? (
-                        <p className="street-art-p">
-                          Aucune capture à valider.
-                        </p>
-                      ) : (
-                        <CaptureAdmin
-                          artCapture={artCapture}
-                          setToggleModalCapture={setToggleModalCapture}
-                          setRefuseModalCapture={setRefuseModalCapture}
-                          userId={userId}
-                          captureId={captureId}
-                        />
-                      )}
-                    </div>
-                  )}
-                  {activeComponent === "newWork" && <NewArtAdmin />}
-                  {activeComponent === "reported" && <ReportedArtAdmin />}
+                  <div>
+                    {artCapture.length === 0 ? (
+                      <p className="street-art-p">Aucune capture à valider.</p>
+                    ) : (
+                      <CaptureAdmin
+                        artCapture={artCapture}
+                        setToggleModalCapture={setToggleModalCapture}
+                        setRefuseModalCapture={setRefuseModalCapture}
+                        userId={userId}
+                        captureId={captureId}
+                      />
+                    )}
+                  </div>
                   {toggleModalCapture === true && (
                     <ValidateCaptureAdmin
                       setToggleModalCapture={setToggleModalCapture}
